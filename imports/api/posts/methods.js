@@ -1,29 +1,25 @@
 import {Meteor} from 'meteor/meteor'
-import {Posts} from '/db';
+import PostService from "./services/PostService";
+
 
 Meteor.methods({
     'post.create'(post) {
-        Posts.insert(post);
+        PostService.create(post);
     },
 
-    'post.list' () {
-        return Posts.find().fetch();
+    'post.list'() {
+        return PostService.list();
     },
 
-    'post.edit' (_id, post) {
-        Posts.update(_id, {
-            $set: {
-                title: post.title,
-                description: post.description
-            }
-        });
+    'post.edit'(_id, post) {
+        PostService.edit(_id, post);
     },
 
-    'post.remove' (_id){
-        Posts.remove(_id);
+    'post.remove'(_id) {
+        return PostService.remove(_id);
     },
 
-    'post.get' (_id) {
-        return Posts.findOne(_id);
+    'post.get'(_id) {
+        return PostService.getOne(_id);
     }
 });

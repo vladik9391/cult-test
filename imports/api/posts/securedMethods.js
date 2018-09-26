@@ -17,7 +17,8 @@ Meteor.methods({
         Posts.update({_id: _id, userId: this.userId}, {
             $set: {
                 title: postData.title,
-                description: postData.description
+                description: postData.description,
+                type: postData.type
             }
         });
     },
